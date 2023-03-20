@@ -1,4 +1,4 @@
-package com.com.alibaba;
+package com.alibaba;
 
 
 import java.util.Scanner;
