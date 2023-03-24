@@ -4,12 +4,8 @@ import java.util.*;
 
 public class LegalityOfOverloadedMethods {
 
-
-
-
     public static void main(String [] args){
-//        System.out.println("三个".hashCode());
-//        System.out.println("上下".hashCode());
+
         class Params {
 
             private ArrayList<String> paramsArr;
@@ -40,9 +36,13 @@ public class LegalityOfOverloadedMethods {
             @Override
             public boolean equals(Object obj){
                 //使用 == 检查参数是否为这个对象的引用。
-                if(obj == this) return true;
+                if(obj == this) {
+                    return true;
+                }
                 //使用instanceof 检查参数是否为正确类型。
-                if (!(obj instanceof Params)) return false;
+                if (!(obj instanceof Params)) {
+                    return false;
+                }
                 Params params2 = (Params) obj;
                 ArrayList<String> thatParams = params2.getParamsArr();
                 if (paramsArr.size()!=thatParams.size()){
@@ -70,10 +70,11 @@ public class LegalityOfOverloadedMethods {
             String method = sc.nextLine();
             String methodName = method.split(" ")[1];
             String paramsString = method.split("\\(")[1];
-            if (paramsString.length()==1)
+            if (paramsString.length()==1) {
                 paramsString = "";
-            else
+            } else {
                 paramsString = paramsString.split("\\)")[0];
+            }
 //            System.out.println(paramsString);
             Params params = new Params();
             params.addPara(paramsString);
