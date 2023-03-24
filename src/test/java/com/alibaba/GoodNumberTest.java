@@ -15,7 +15,7 @@ public class GoodNumberTest {
         int [] hisResults = new  int[888];
         long startTime = System.currentTimeMillis();
         for (int k=1;k<888;k++){
-               myResults[k] = goodNumber.MaxKGoodNum(k);
+               myResults[k] = goodNumber.maxGoodNumK(k);
         }
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
