@@ -31,13 +31,11 @@ public class LongestSubstrings {
             return null;
         }
         int [] lens = new int[s.length()];
-        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> map = new HashMap<>();
         int max = 0;
         int left = 0;
         for(int right = 0; right < s.length(); right++){
             if(map.containsKey(s.charAt(right))){
-//                System.out.println(left);
-//                System.out.println(map.get(s.charAt(i)) + 1);
                 left = Math.max(left, map.get(s.charAt(right)) + 1);
             }
             lens[right] = right -left+1;
@@ -54,13 +52,45 @@ public class LongestSubstrings {
 
     }
 
-    public static void main(String[] args) {
-        LongestSubstrings ls = new LongestSubstrings();
-        String[] res = ls.longestSubstrings("abcabcbb");
-        for (String re : res) {
-//            System.out.println(re);
+    public  String[] allLongestSubstringsWithoutRepeatingCharacters(String s) {
+        int maxLen = 0;
+        Set<String> maxSubstrings = new HashSet<>();
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j <= s.length(); j++) {
+                String substring = s.substring(i, j);
+                if (isSubstringWithoutRepeatingCharacters(substring)) {
+                    if (substring.length() > maxLen) {
+                        maxLen = substring.length();
+                        maxSubstrings = new HashSet<>();
+                        maxSubstrings.add(substring);
+                    } else if (substring.length() == maxLen) {
+                        maxSubstrings.add(substring);
+                    }
+                }
+            }
         }
+        return maxSubstrings.toArray(new String[0]);
+    }
 
+    private static boolean isSubstringWithoutRepeatingCharacters(String s) {
+        Set<Character> charSet = new HashSet<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (charSet.contains(s.charAt(i))) {
+                return false;
+            }
+            charSet.add(s.charAt(i));
+        }
+        return true;
+    }
+    public static String generateRandomString(int length) {
+        String alphabet = "abcdefghijklmnopqrstuvwxyzaabbcc";
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(alphabet.length());
+            sb.append(alphabet.charAt(index));
+        }
+        return sb.toString();
     }
 
 
